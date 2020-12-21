@@ -17,6 +17,10 @@
       integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
       crossorigin="anonymous"
     ></script>
+    <script
+      src="https://kit.fontawesome.com/5a81cc2ea8.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -24,27 +28,51 @@
 
     <div class="container">
       <div class="row">
+        <!-- SEARCH AREA -->
         <div class="col-3">
-          SEARCH FOR A CITY GOES HERE
+          <h3 id="search-city">Search for a City:</h3>
           <div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem,
-            nihil nemo eos iste rerum obcaecati explicabo quo officiis
-            perferendis voluptas eligendi at architecto inventore molestiae.
-            Mollitia eum sint earum qui dignissimos libero at unde fugit
-            exercitationem, animi facere beatae corrupti corporis, pariatur esse
-            saepe distinctio? Aut id error illum accusantium quisquam recusandae
-            laboriosam culpa omnis eaque nam sint fugiat, cupiditate facere in
-            ipsa nihil officia veritatis modi et repellat. Reprehenderit
-            quaerat, impedit hic molestias illum, voluptates, maxime cupiditate
-            quas nam dicta totam possimus ad dolorum dolorem sequi eveniet quasi
-            vitae. Veniam animi labore culpa sed aperiam enim facere sint
-            suscipit?
+            <form>
+              <div class="mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="search-input"
+                  aria-describedby="searchinput"
+                />
+              </div>
+              <button
+                type="submit"
+                class="btn btn-primary btn-lg fas fa-search-location"
+                id="search-button"
+              ></button>
+            </form>
           </div>
+          <br />
+          <table class="table table-bordered table-hover">
+            <thead></thead>
+            <tbody id="saved-cities">
+                <!-- <th scope="row">TESTING</th>
+                <tr></tr>
+                <th scope="row">TESTING2</th> -->
+              <!-- <tr>
+                <th scope="row">Philadelphia</th>
+              </tr>
+              <tr>
+                <th scope="row">Atlanta</th>
+              </tr>
+              <tr>
+                <th scope="row">Calgary</th>
+              </tr> -->
+            </tbody>
+          </table>
         </div>
+
+        <!-- CURRENT CITY INFO -->
         <div class="col-9">
           <div class="row">
             <div>
-              <h2 id="current-city">CITY NAME GOES HERE</h2>
+              <h2 id="current-city"></h2>
               <p id="current-temp">Temperature:</p>
               <p id="current-humidity">Humidity:</p>
               <p id="current-wind">Wind Speed:</p>
@@ -52,33 +80,17 @@
             </div>
           </div>
           <div class="row" id="forecast-area">
-              <h2 id="forecast-header">5-Day Forecast</h2>
-
-              <!-- <div class="col-2">
-                  <h3 id="forecast1"></h3>
-                  <img id="icon1"/>
-              </div>
-              <div class="col-2">
-                  <h3 id="forecast2"></h3>
-              </div>
-              <div class="col-2">
-                <h3 id="forecast3"></h3>
-
-              </div>
-              <div class="col-2">
-                <h3 id="forecast4"></h3>
-
-              </div>
-              <div class="col-2">
-                <h3 id="forecast5"></h3>
-              </div> -->
-
+            <h2 id="forecast-header">5-Day Forecast</h2>
           </div>
         </div>
       </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.js"
+      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+      crossorigin="anonymous"
+    ></script>
     <script src="javascript.js"></script>
   </body>
 </html>
