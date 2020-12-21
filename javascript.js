@@ -5,43 +5,57 @@ var day = d.getDate();
 var year = d.getFullYear();
 var today = month + "-" + day + "-" + year;
 
+var savedButton = $(".saved-button");
 var searchButton = $("#search-button");
 var searchInput = $("#search-input");
 var cityName = "";
-var pastSearches = JSON.parse(localStorage.getItem("City"));
+var pastSearches = [];
 
 function searchHistory() {
+  var savedCities = $("#saved-cities");
+  var trEl = $("<tr>");
+  var thEl = $("<th>");
+  thEl.text(cityName).attr("scope", "row").addClass("saved-button");
+  trEl.append(thEl);
+  savedCities.append(trEl);
+}
+
+function searchHistoryStartUp() {
+  var citiesInStorage = JSON.parse(localStorage.getItem("City"));
+
+  if (citiesInStorage === null) {
+    var citiesInStorage = [""];
+  }
+
+  for (i = 0; i < citiesInStorage.length; i++) {
     var savedCities = $("#saved-cities");
-      var trEl = $("<tr>");
-      var thEl = $("<th>");
-      console.log(localStorage.getItem("City"));
-      thEl.text(cityName).attr("scope", "row");
-      trEl.append(thEl);
-      savedCities.append(trEl);
-};
+    var trEl = $("<tr>");
+    var thEl = $("<th>");
+    thEl.text(citiesInStorage[i]).attr("scope", "row").addClass("saved-button");
+    trEl.append(thEl);
+    savedCities.append(trEl);
+  }
+}
 
 $(document).ready(function () {
-  console.log(pastSearches);
+  searchHistoryStartUp();
 
-  if (pastSearches !== null) {
-    var pastSearches = JSON.parse(localStorage.getItem("City"));
+  var citiesInStorage = JSON.parse(localStorage.getItem("City"));
+
+  for (i = 0; i < pastSearches.length; i++) {
     searchHistory();
+  }
 
-
-    for (i = 0; i < pastSearches.length; i++) {
-      var savedCities = $("#saved-cities");
-      var trEl = $("<tr>");
-      var thEl = $("<th>");
-      console.log(localStorage.getItem("City"));
-      thEl.text(pastSearches[i]).attr("scope", "row");
-      trEl.append(thEl);
-      savedCities.append(trEl);
-    }
-  };
-
+  //   Got stuck here. Would run the getForecast function here, but don't know how to
+  //   get the city name, then pass that into the function.
+  savedButton.on("click", function () {});
 
   searchButton.on("click", function () {
     event.preventDefault();
+    getForecast();
+  });
+
+  function getForecast() {
     cityName = searchInput.val();
     pastSearches.push(cityName);
     var toRemove = $("#forecast-area");
@@ -59,7 +73,6 @@ $(document).ready(function () {
       url: queryURL,
       method: "GET",
     }).then(function (response) {
-
       var cityName = $("#current-city");
       var cityLatitude = response.coord.lat;
       var cityLongitude = response.coord.lon;
@@ -74,8 +87,6 @@ $(document).ready(function () {
       currentTemp.text("Temperature: " + response.main.temp + "º");
       currentHumidity.text("Humidity: " + response.main.humidity + "%");
       currentWind.text("Wind Speed: " + response.wind.speed + " MPH");
-      currentUV.text("WILL FIX THIS SHIT LATER");
-
       var cityIcon = $("<img>");
       cityIcon.attr("src", iconURL);
       cityName.append(cityIcon);
@@ -130,7 +141,6 @@ $(document).ready(function () {
         forecastArea.append(h3El);
       }
       searchHistory();
-
     });
-  });
+  }
 });
